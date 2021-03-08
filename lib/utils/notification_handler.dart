@@ -4,12 +4,18 @@ import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:malaundry_kurir_flutter/data/local/app_config.dart';
 import 'package:malaundry_kurir_flutter/data/model/account_model/account_model.dart';
 import 'package:malaundry_kurir_flutter/data/model/account_model/app_config_model.dart';
 import 'package:malaundry_kurir_flutter/data/network/network_export.dart';
 import 'package:malaundry_kurir_flutter/data/network/repository/account_repository/account_repo.dart';
 import 'package:malaundry_kurir_flutter/data/notification_model/notification_model.dart';
+import 'package:malaundry_kurir_flutter/ui/main/home_screen/home_page.dart';
+import 'package:malaundry_kurir_flutter/ui/main/request_antar_screen/request_antar_page.dart';
+import 'package:malaundry_kurir_flutter/ui/main/request_jemput_screen/request_jemput_page.dart';
+
+import 'export_utils.dart';
 
 class NotificationHandler extends ChangeNotifier {
   ///  ===== Constructor =====
@@ -32,8 +38,32 @@ class NotificationHandler extends ChangeNotifier {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
   List<DataNotif> _listNotif = [];
+  String json;
   bool _isLoading = false;
   bool isChat = false;
+  int _pageIndex = 0;
+  int _detailJemputId;
+  int _detailAntarId;
+
+  int get detailJemputId => _detailJemputId;
+  set detailJemputId(int val) {
+    _detailJemputId = val;
+    notifyListeners();
+  }
+  int get detailAntarId => _detailAntarId;
+  set detailAntarId(int val) {
+    _detailAntarId = val;
+    notifyListeners();
+  }
+
+
+  int get pageIndex => _pageIndex;
+  set pageIndex(int val) {
+    _pageIndex = val;
+    notifyListeners();
+  }
+
+
   bool get isLoading => _isLoading;
   set isLoading(bool val) {
     _isLoading = val;
@@ -57,13 +87,47 @@ class NotificationHandler extends ChangeNotifier {
     firebaseMessaging.configure(
       onMessage: (message) async {
         debugPrint("onMessage $message");
-        showLocalNotif(message);
+        // showLocalNotif(message);
+        Fluttertoast.showToast(
+          msg: "onMessage order id : ${listNotif[0].datas.idJemput ?? listNotif[0].datas.idAntar}"
+              // "\nNotif Content : ${listNotif[0].body}",
+              "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,);
+        pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
+        // navigateTo(
+        // navigateRemoveUntil(
+        //     context, listNotif[0].body.contains("Pick up") == true ? HomePage(pageIndex: 0) : HomePage(pageIndex: 1,));
       },
       onResume: (message) async {
         debugPrint("onResume $message");
+        Fluttertoast.showToast(
+          msg: "onResume order id : ${listNotif[0].id}"
+                // "\nNotif Content : ${listNotif[0].body}",
+              "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,);
+        pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
+        // navigateRemoveUntil(
+        //     context, listNotif[0].body.contains("Pick up") == true ? HomePage(pageIndex: 0) : HomePage(pageIndex: 1,));
       },
       onLaunch: (message) async {
         debugPrint("onResume $message");
+        Fluttertoast.showToast(
+          msg: "onLaunch order id : ${listNotif[0].id}"
+              "\norderType : ${ listNotif[0].body.contains("Pick Up") ? "Jemput" : "Antar"}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,);
+        pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
+        // navigateRemoveUntil(
+        //     context, listNotif[0].body.contains("Pick up") == true ? HomePage(pageIndex: 0) : HomePage(pageIndex: 1,));
+
       },
     );
     firebaseMessaging.requestNotificationPermissions(
@@ -96,6 +160,7 @@ class NotificationHandler extends ChangeNotifier {
   /// onSelect Notif
   Future<void> onSelectNotification(String json) async {
     log("res $json");
+    json = json;
     // if(json.contains("Pick up")){
     //   navigateTo(context, HomePage(pageSelectedParameter: 1));
     // } else {

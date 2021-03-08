@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:malaundry_kurir_flutter/ui/config/colors.dart';
 import 'package:malaundry_kurir_flutter/ui/config/export_config.dart';
 import 'package:malaundry_kurir_flutter/ui/main/account_screen/profile_page.dart';
@@ -14,14 +15,21 @@ import 'package:provider/provider.dart';
 TabController mainPageController;
 
 class HomePage extends StatefulWidget {
+  // final int pageIndex;
+  // final int idAntar;
+  // final int idJemput;
+  // HomePage({this.pageIndex, this.idJemput, this.idAntar});
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  // int get _pageIndex => widget.pageIndex;
+  NotificationHandler notificationHandler;
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      // _selectedIndex = index;
+      notificationHandler.pageIndex = index;
       mainPageController.animateTo(_selectedIndex);
     });
   }
@@ -29,51 +37,66 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Pick Up',
-      // style: optionStyle,
     ),
     Text(
       'Antar',
-      // style: optionStyle,
     ),
-    // Text(
-    //   'Inbox',
-    //   // style: optionStyle,
-    // ),
     Text(
       'Profil',
-      // style: optionStyle,
     ),
   ];
 
   var _selectedIndex = 0;
   var pageList
-      // = [];
-      = [
-    RequestJemputPage(),
-    RequestAntarPage(),
-    // InboxPage(),
-    ProfilePage(),
-  ];
+      = <Widget>[];
+  //     = [
+  //   RequestJemputPage(),
+  //   RequestAntarPage(),
+  //   ProfilePage(),
+  // ];
 
   handleDataNotif(String menu) {
     setState(() {
       if (menu.contains("jemput")) {
+
+        notificationHandler.pageIndex = 0;
         mainPageController.animateTo(0);
-        _selectedIndex = 0;
+        // _selectedIndex = 0;
         // titleMenu = listNameMenu[6];
       }
       if (menu.contains("antar")) {
+
+        notificationHandler.pageIndex = 1;
         mainPageController.animateTo(1);
-        _selectedIndex = 1;
+        // _selectedIndex = 1;
         // titleMenu = listNameMenu[7];
       }
     });
   }
+
   @override
   void initState() {
     super.initState();
+    // if (_pageIndex != null) {
+    //   Fluttertoast.showToast(
+    //     msg: "Page Index From Notif : $_pageIndex",
+    //     // "\nNotif Content : ${listNotif[0].body}",
+    //     //     "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.CENTER,
+    //     backgroundColor: Colors.black,
+    //     textColor: Colors.white,);
+    //   _selectedIndex = _pageIndex;
+    // }
+    pageList = [
+      RequestJemputPage(),
+      RequestAntarPage(),
+      // InboxPage(),
+      ProfilePage(),
+    ];
     mainPageController = TabController(length: pageList.length, vsync: this);
   }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -82,11 +105,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             create: (context) => NotificationHandler(context))
       ],
       child: Consumer<NotificationHandler>(
-        builder: (context, notifBloc, _) => Scaffold(
-          // drawer: DrawerHome(
-          //   listNameMenu: listNameMenu,
-          //   controller: mainPageController,
-          // ),
+        builder: (context, notifBloc, _) {
+          // notifBloc.pageIndex == 0 ? _selectedIndex = 0: _selectedIndex = 1 ;
+          _selectedIndex = notifBloc.pageIndex;
+          mainPageController.animateTo(_selectedIndex);
+          notificationHandler = notifBloc;
+          return Scaffold(
           appBar: AppBar(
             title: _widgetOptions[_selectedIndex],
             actions: [
@@ -112,7 +136,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       .then((value) {
                     log("Res $value");
                     String data =
-                    value.toString().replaceAll(RegExp(r'[/,_]'), "");
+                        value.toString().replaceAll(RegExp(r'[/,_]'), "");
                     handleDataNotif(data.toLowerCase());
                   });
                 },
@@ -120,9 +144,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
           ),
           body: TabBarView(
-    physics: NeverScrollableScrollPhysics(),
-    controller: mainPageController,
-    children: pageList.map((e) => e).toList(),),
+            physics: NeverScrollableScrollPhysics(),
+            controller: mainPageController,
+            children: pageList.map((e) => e).toList(),
+          ),
           // Container(
           //   child: Center(
           //     child: _widgetOptions[_selectedIndex],
@@ -130,7 +155,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           //   ),
           // ),
           bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _selectedIndex,
+              currentIndex: notifBloc.pageIndex,
+              // _selectedIndex,
               selectedItemColor: primaryColor,
               // unselectedIconTheme: IconThemeData(color: Colors.grey),
               unselectedItemColor: Colors.grey,
@@ -154,7 +180,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           //   controller: mainPageController,
           //   children: listMenu.map((e) => e).toList(),
           // ),
-        ),
+        );
+        },
       ),
     );
   }

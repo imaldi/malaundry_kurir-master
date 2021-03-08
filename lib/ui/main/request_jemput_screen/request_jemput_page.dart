@@ -19,6 +19,7 @@ class _RequestJemputPageState extends State<RequestJemputPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DataRequestJemputBloc(context))
+        // ChangeNotifierProvider(create: (context) => ,)
       ],
       child: Consumer<DataRequestJemputBloc>(
         builder: (context, requestJemputBloc, _) => RefreshIndicator(
@@ -28,7 +29,8 @@ class _RequestJemputPageState extends State<RequestJemputPage> {
           child:
           // Scaffold(
           //   body:
-            SafeArea(
+          //   var data = requestJemputBloc.listDataRequestJemput.firstWhere((element) => element.idJemput == notifBloc?.detailJemputId);
+      SafeArea(
               child: Container(
                 child: Column(
                   children: [
