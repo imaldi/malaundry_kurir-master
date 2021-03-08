@@ -23,13 +23,15 @@ class _OTPScreenState extends State<OTPScreen> {
   final BoxDecoration pinPutDecoration = BoxDecoration(
     // color: const Color.fromRGBO(43, 46, 66, 1),
     borderRadius: BorderRadius.circular(10.0),
-    border: Border(
-      bottom: BorderSide(color: Colors.black)
-    )
-    //     .all(
-    //   // color: const Color.fromRGBO(126, 203, 224, 1),
-    //   color: Colors.black,
-    // ),
+    border: Border
+    //   (
+    //   bottom: BorderSide(color: Colors.black)
+    // )
+
+        .all(
+      // color: const Color.fromRGBO(126, 203, 224, 1),
+      color: Colors.black,
+    ),
   );
 
   @override
@@ -69,7 +71,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         padding: const EdgeInsets.all(30.0),
                         child: PinPut(
                           fieldsCount: 6,
-                          textStyle: const TextStyle(fontSize: 25.0),
+                          textStyle: const TextStyle(fontSize: 25.0,color: Colors.black),
                           eachFieldWidth: 40.0,
                           eachFieldHeight: 55.0,
                           focusNode: _pinPutFocusNode,

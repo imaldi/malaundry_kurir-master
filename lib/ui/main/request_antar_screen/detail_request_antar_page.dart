@@ -475,7 +475,7 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                       requestAntarBloc.updateRequestAntar(
                                                           dataRequestAntar.idAntar,
                                                           isTerima: true);
-                                                      Navigator.of(context).pop();
+                                                      // Navigator.of(context).pop();
                                                       // requestAntarBloc
                                                       //     .getDetailRequestJemput(data);
                                                     },
@@ -496,7 +496,7 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                       requestAntarBloc.updateRequestAntar(
                                                           dataRequestAntar.idAntar,
                                                           isTerima: false);
-                                                      Navigator.of(context).pop();
+                                                      // Navigator.of(context).pop();
                                                     },
                                                     color: canceledButtonColor,
                                                   ),
@@ -535,6 +535,7 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                                 dataRequestAntar.idAntar,
                                                                 isReceived: true);
                                                             deleteWholeChatHistoryWithThisId(dataRequestAntar.idAntar);
+                                                            Navigator.pop(context);
                                                             // requestAntarBloc
                                                             //     .getDetailRequestJemput(data);
                                                           },

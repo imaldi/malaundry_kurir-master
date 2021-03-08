@@ -89,7 +89,7 @@ class DataRequestJemputBloc extends ChangeNotifier {
   Future updateRequestJemput(int idData, {bool isTerima, isReceived}) async {
 
     await requestJemputRepo.updateRequestJemput(idData,isTerima: isTerima, isReceived: isReceived).then((value) {
-      // Navigator.pop(context);
+      Navigator.pop(context);
       // Navigator.pop(context);
       init();
     });

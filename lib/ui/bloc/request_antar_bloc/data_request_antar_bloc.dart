@@ -113,7 +113,7 @@ class DataRequestAntarBloc extends ChangeNotifier {
   Future updateRequestAntar(int idData, {bool isTerima, isReceived}) async {
     // progressDialog(context);
     await requestAntarRepo.updateRequestAntar(idData,isTerima: isTerima, isReceived: isReceived).then((value) {
-      // Navigator.pop(context);
+      Navigator.pop(context);
       init();
     });
   }

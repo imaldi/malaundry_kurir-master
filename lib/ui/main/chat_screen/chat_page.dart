@@ -222,6 +222,7 @@ class _ChatPageState extends State<ChatPage> {
                       padding: const EdgeInsets.fromLTRB(high,0,0,0),
                       child: TextFormField(
                         controller: message,
+                        decoration: InputDecoration(hintText: "Ketik pesan..."),
                       ),
                     ),
                   ),

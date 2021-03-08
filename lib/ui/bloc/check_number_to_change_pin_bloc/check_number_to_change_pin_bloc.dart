@@ -61,7 +61,7 @@ class CheckNumberToChangePinBloc extends ChangeNotifier {
         Fluttertoast.showToast(
           msg: "Sukses Update PIN",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
+          gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.black,
           textColor: Colors.white,);
         navigateTo(context, LoginPage());

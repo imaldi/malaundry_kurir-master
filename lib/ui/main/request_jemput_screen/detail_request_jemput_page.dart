@@ -209,7 +209,7 @@ class _DetailRequestJemputPageState extends State<DetailRequestJemputPage> {
                                                 requestJemputBloc.updateRequestJemput(
                                                     data.idJemput,
                                                     isTerima: false);
-                                                Navigator.of(context).pop();
+                                                // Navigator.of(context).pop();
                                               },
                                               color: canceledButtonColor,
                                             ),

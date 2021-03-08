@@ -88,43 +88,43 @@ class NotificationHandler extends ChangeNotifier {
       onMessage: (message) async {
         debugPrint("onMessage $message");
         // showLocalNotif(message);
-        Fluttertoast.showToast(
-          msg: "onMessage order id : ${listNotif[0].datas.idJemput ?? listNotif[0].datas.idAntar}"
-              // "\nNotif Content : ${listNotif[0].body}",
-              "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.CENTER,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,);
-        pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
+        // Fluttertoast.showToast(
+        //   msg: "onMessage order id : ${listNotif[0].datas.idJemput ?? listNotif[0].datas.idAntar}"
+        //       // "\nNotif Content : ${listNotif[0].body}",
+        //       "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
+        //   toastLength: Toast.LENGTH_LONG,
+        //   gravity: ToastGravity.CENTER,
+        //   backgroundColor: Colors.black,
+        //   textColor: Colors.white,);
+        // pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
         // navigateTo(
         // navigateRemoveUntil(
         //     context, listNotif[0].body.contains("Pick up") == true ? HomePage(pageIndex: 0) : HomePage(pageIndex: 1,));
       },
       onResume: (message) async {
         debugPrint("onResume $message");
-        Fluttertoast.showToast(
-          msg: "onResume order id : ${listNotif[0].id}"
-                // "\nNotif Content : ${listNotif[0].body}",
-              "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,);
-        pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
+        // Fluttertoast.showToast(
+        //   msg: "onResume order id : ${listNotif[0].id}"
+        //         // "\nNotif Content : ${listNotif[0].body}",
+        //       "\norderType : ${ listNotif[0].body.contains("Pick up") ? "Jemput" : "Antar"}",
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.CENTER,
+        //   backgroundColor: Colors.black,
+        //   textColor: Colors.white,);
+        // pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
         // navigateRemoveUntil(
         //     context, listNotif[0].body.contains("Pick up") == true ? HomePage(pageIndex: 0) : HomePage(pageIndex: 1,));
       },
       onLaunch: (message) async {
         debugPrint("onResume $message");
-        Fluttertoast.showToast(
-          msg: "onLaunch order id : ${listNotif[0].id}"
-              "\norderType : ${ listNotif[0].body.contains("Pick Up") ? "Jemput" : "Antar"}",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,);
-        pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
+        // Fluttertoast.showToast(
+        //   msg: "onLaunch order id : ${listNotif[0].id}"
+        //       "\norderType : ${ listNotif[0].body.contains("Pick Up") ? "Jemput" : "Antar"}",
+        //   toastLength: Toast.LENGTH_SHORT,
+        //   gravity: ToastGravity.CENTER,
+        //   backgroundColor: Colors.black,
+        //   textColor: Colors.white,);
+        // pageIndex = listNotif[0].body.contains("Pick up") == true ? 0 : 1;
         // navigateRemoveUntil(
         //     context, listNotif[0].body.contains("Pick up") == true ? HomePage(pageIndex: 0) : HomePage(pageIndex: 1,));
 
