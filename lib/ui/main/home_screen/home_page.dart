@@ -18,7 +18,11 @@ class HomePage extends StatefulWidget {
   // final int pageIndex;
   // final int idAntar;
   // final int idJemput;
-  // HomePage({this.pageIndex, this.idJemput, this.idAntar});
+  // HomePage({
+    // this.pageIndex,
+    // this.idJemput,
+    // this.idAntar
+  // });
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -36,7 +40,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Pick Up',
+      'Jemput',
     ),
     Text(
       'Antar',
@@ -76,6 +80,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    notificationHandler = NotificationHandler(context);
     super.initState();
     // if (_pageIndex != null) {
     //   Fluttertoast.showToast(
@@ -102,14 +107,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (context) => NotificationHandler(context))
+            create: (context) => notificationHandler)
       ],
       child: Consumer<NotificationHandler>(
         builder: (context, notifBloc, _) {
           // notifBloc.pageIndex == 0 ? _selectedIndex = 0: _selectedIndex = 1 ;
           _selectedIndex = notifBloc.pageIndex;
           mainPageController.animateTo(_selectedIndex);
-          notificationHandler = notifBloc;
+          // notificationHandler = notifBloc;
           return Scaffold(
           appBar: AppBar(
             title: _widgetOptions[_selectedIndex],
@@ -168,7 +173,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     icon: Icon(
                       Icons.file_download,
                     ),
-                    label: "Pickup"),
+                    label: "Jemput"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.file_upload), label: "Hantar"),
                 // BottomNavigationBarItem(icon: Icon(Icons.email_outlined),label: "Inbox"),

@@ -126,8 +126,9 @@ class _DetailRequestJemputPageState extends State<DetailRequestJemputPage> {
                                             children: [
                                               detailItem2(
                                                 context,
-                                                title: "ID Request",
-                                                content: data.idJemput.toString(),
+                                                title: "Total Berat",
+                                                content: "${data.berat
+                                                    .toString()} Kg",
                                               ),
                                               detailItem2(
                                                 context,
@@ -136,7 +137,7 @@ class _DetailRequestJemputPageState extends State<DetailRequestJemputPage> {
                                               ),
                                               detailItem2(
                                                 context,
-                                                title: "Nama Customer",
+                                                title: "Nama Konsumen",
                                                 content: data.namaKonsumen,
                                               ),
                                               detailItem2(

@@ -74,7 +74,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                         ),
                                       ),
                                       Text(
-                                        "${formatDate(data?.createdAt, withTimes: true)}",
+                                        "${formatDate(data?.sendBy.updatedAt, withTimes: true)}",
                                         style: sansPro(fontSize: 10),
                                       ),
                                     ],

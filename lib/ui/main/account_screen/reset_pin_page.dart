@@ -224,7 +224,7 @@ class _ResetPINPageState extends State<ResetPINPage> {
                                                       normal)),
                                           color: primaryColor,
                                           textColor: whiteNeutral,
-                                          child: Text("Set New PIN"),
+                                          child: Text("Simpan"),
                                           onPressed:
                                               // (_pinPutController.text ==  _pinPutConfirmationController) ?
                                               () {

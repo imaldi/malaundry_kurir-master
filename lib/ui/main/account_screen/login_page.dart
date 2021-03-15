@@ -146,6 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                           CustomTextField(
                             label: "PIN",
                             obscureText: obScure,
+                            keyboardType: TextInputType.number,
                             suffixIcon: IconButton(
                               icon: Icon(obScure
                                   ? Icons.visibility

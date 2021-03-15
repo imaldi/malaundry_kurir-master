@@ -51,7 +51,7 @@ class DataRequestJemputBloc extends ChangeNotifier {
     // DataRequestJemput data;
     progressDialog(context);
 
-    var res = await requestJemputRepo.getDetailRequestJemput(dataRequestJemput);
+    var res = await requestJemputRepo.getDetailRequestJemput(dataRequestJemput.idJemput);
 
     // log(dataRequestJemput.toString());
     Navigator.pop(context);

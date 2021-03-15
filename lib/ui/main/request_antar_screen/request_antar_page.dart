@@ -45,6 +45,7 @@ class _RequestAntarPageState extends State<RequestAntarPage> {
                     HeaderSearch(
                       showAddButton: false,
                       onCancelSearch: () => requestAntarBloc.init(),
+                      onResetFilter: () => requestAntarBloc.init(),
                       onSearch: (query) => requestAntarBloc.search(query),
                       onSubmitFilter:
                           (dateFrom, dateTo, filterBy, statusBy) async {
@@ -83,10 +84,10 @@ class _RequestAntarPageState extends State<RequestAntarPage> {
                                           } else if(statusPersetujuanKurir == "DISETUJUI"){
                                             warna = onProgressButtonColor;
                                             textButton = "On Progress";
-                                          } else {
-                                            warna = canceledButtonColor;
-                                            textButton = "Ditolak";
                                           }
+                                        }else if(status == "CANCELED"){
+                                          warna = canceledButtonColor;
+                                          textButton = "Ditolak";
                                         }
                                       }
 
@@ -126,9 +127,10 @@ class _RequestAntarPageState extends State<RequestAntarPage> {
                                                       data?.namaKonsumen ??
                                                           "n/a",
                                                       style: sansPro(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 16),
+                                                          // fontWeight:
+                                                          //     FontWeight.w600,
+                                                          color: greyColor,
+                                                          fontSize: medium),
                                                     ),
                                                     // Text(
                                                     //     data?.konsumenFullName ??
@@ -139,6 +141,7 @@ class _RequestAntarPageState extends State<RequestAntarPage> {
                                                       "${data?.createdDate}",
                                                         // "${formatDate(data?.createdAt, withTimes: true)}",
                                                         style: sansPro(
+                                                            fontSize: medium,
                                                             color: greyColor)),
                                                     // labelProgress(
                                                     //     data?.statusLaundry ??

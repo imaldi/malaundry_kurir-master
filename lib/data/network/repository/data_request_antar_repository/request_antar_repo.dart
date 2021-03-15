@@ -56,11 +56,13 @@ class RequestAntarRepository {
       if(isTerima){
         query['status_persetujuan_kurir'] = "DISETUJUI";
       } else {
+        query['status'] = "CANCELED";
         query['status_persetujuan_kurir'] = "DITOLAK";
       }
     }
     else {
       if(isReceived == true){
+        query['status_persetujuan_kurir'] = "DISETUJUI";
         query['status'] = "COMPLETED";
       }
     }
@@ -82,31 +84,12 @@ class RequestAntarRepository {
     }
   }
 
-  // /// API SET Canceled LAUNDRY
-  // Future setCanceledLaundry(DataOrder data, String note) async {
-  //   try {
-  //     Response res = await dio.post(
-  //         SET_CANCEL_LAUNDRY_URL + "${data?.idTransaksi}",
-  //         data: FormData.fromMap(
-  //             {'catatan_cancel': note ?? "Cancel Order ya Pak/Bu"}),
-  //         options: Options(headers: apiHeader.headers));
-  //     if (res.statusCode == 200) {
-  //       return res.data;
-  //     }
-  //   } on DioError catch (e, st) {
-  //     log("Exception $e");
-  //     return DioHandler.parseDioErrorMessage(e, st);
-  //   } catch (e) {
-  //     log("Exception $e");
-  //     return e;
-  //   }
-  // }
 
   /// API GET Request Antar Data
   Future getDataRequestAntar(
       {DateTime dateFrom,
         DateTime dateTo,
-        String filterBy = "ALL",
+        String filterBy = "Today",
         String statusBy}) async {
     Map<String, dynamic> query = {};
     var check = await pref;

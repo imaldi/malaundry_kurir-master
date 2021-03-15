@@ -15,7 +15,9 @@ class CheckPhoneNumberPage extends StatefulWidget {
 class _CheckPhoneNumberPageState extends State<CheckPhoneNumberPage> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController _controller = TextEditingController(text: "82235539449");
+    TextEditingController _controller = TextEditingController(
+        // text: "82235539449"
+    );
     return MultiProvider(
         providers: [
         ChangeNotifierProvider(create: (context) => CheckNumberToChangePinBloc(context))

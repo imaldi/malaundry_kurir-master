@@ -8,6 +8,7 @@ class HeaderSearch extends StatefulWidget {
   final Function(String query) onSearch;
   final Function onCancelSearch;
   final Function onAddData;
+  final Function onResetFilter;
   final Function(
           DateTime dateFrom, DateTime dateTo, String filterBy, String statusBy)
       onSubmitFilter;
@@ -18,6 +19,7 @@ class HeaderSearch extends StatefulWidget {
     this.onSearch,
     this.onAddData,
     this.onSubmitFilter,
+    this.onResetFilter,
     this.showAddButton = true,
     this.onCancelSearch,
   }) : super(key: key);
@@ -131,6 +133,7 @@ class _HeaderSearchState extends State<HeaderSearch> {
           onSubmit: (dateFrom, dateTo, filterBy, statusBy) async {
             widget.onSubmitFilter(dateFrom, dateTo, filterBy, statusBy);
           },
+          onReset: (){widget.onResetFilter();},
         ),
       ),
     );
@@ -248,8 +251,9 @@ class FilterWidget extends StatefulWidget {
   final Function(
           DateTime dateFrom, DateTime dateTo, String filterBy, String statusBy)
       onSubmit;
+  final Function onReset;
 
-  const FilterWidget({Key key, @required this.onSubmit}) : super(key: key);
+  const FilterWidget({Key key, @required this.onSubmit, this.onReset}) : super(key: key);
 
   @override
   _FilterDateWidgetState createState() => _FilterDateWidgetState();
@@ -413,10 +417,16 @@ class _FilterDateWidgetState extends State<FilterWidget> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(small)),
                             onPressed: () {
+
                               setState(() {
                                 dateFrom = null;
                                 dateTo = null;
+                                filterBy = null;
+                                statusBy = null;
+
                               });
+                              Navigator.pop(context);
+                              widget.onReset();
                             },
                           ),
                         ),

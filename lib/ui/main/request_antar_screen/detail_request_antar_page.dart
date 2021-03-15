@@ -528,14 +528,14 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                               BorderRadius
                                                                   .circular(
                                                                   normal)),
-                                                          child: Text('Diterima'),
+                                                          child: Text('Diterima',style: TextStyle(color: primaryColor),),
                                                           onPressed: () {
                                                             requestAntarBloc
                                                                 .updateRequestAntar(
                                                                 dataRequestAntar.idAntar,
                                                                 isReceived: true);
                                                             deleteWholeChatHistoryWithThisId(dataRequestAntar.idAntar);
-                                                            Navigator.pop(context);
+                                                            // Navigator.pop(context);
                                                             // requestAntarBloc
                                                             //     .getDetailRequestJemput(data);
                                                           },
@@ -560,7 +560,7 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                           SizedBox(width: medium),
                                                           InkWell(
                                                               onTap: (){
-                                                                MapUtils.openMap(dataRequestAntar.latitude, dataRequestAntar.longitude);
+                                                                MapUtils.openMap(double.parse(dataRequestAntar.latitude.toString()), double.parse(dataRequestAntar.longitude.toString()));
                                                               },
                                                               child: Icon(Icons.location_on, color: primaryColor,)),
                                                           SizedBox(width: medium),
@@ -591,7 +591,7 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                               BorderRadius
                                                                   .circular(
                                                                   normal)),
-                                                          child: Text('Tutup'),
+                                                          child: Text('Tutup',style: TextStyle(color: primaryColor),),
                                                           onPressed: () {
                                                             Navigator.of(context)
                                                                 .pop();
@@ -622,7 +622,7 @@ class _DetailRequestAntarPageState extends State<DetailRequestAntarPage> {
                                                     BorderRadius
                                                         .circular(
                                                         normal)),
-                                                child: Text('Tutup'),
+                                                child: Text('Tutup',style: TextStyle(color: primaryColor),),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },

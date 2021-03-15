@@ -36,6 +36,7 @@ class _RequestJemputPageState extends State<RequestJemputPage> {
                   children: [
                     HeaderSearch(
                       showAddButton: false,
+                      onResetFilter: () => requestJemputBloc.init(),
                       onCancelSearch: () => requestJemputBloc.init(),
                       onSearch: (query) => requestJemputBloc.search(query),
                       onSubmitFilter:
@@ -75,10 +76,10 @@ class _RequestJemputPageState extends State<RequestJemputPage> {
                                           } else if(statusPersetujuanKurir == "DISETUJUI"){
                                             warna = onProgressButtonColor;
                                             textButton = "On Progress";
-                                          } else {
-                                            warna = canceledButtonColor;
-                                            textButton = "Ditolak";
                                           }
+                                        } else if(status == "CANCELED") {
+                                          warna = canceledButtonColor;
+                                          textButton = "Ditolak";
                                         }
                                       }
 
@@ -110,14 +111,16 @@ class _RequestJemputPageState extends State<RequestJemputPage> {
                                                       data?.namaKonsumen ??
                                                           "n/a",
                                                       style: sansPro(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 16),
+                                                          // fontWeight:
+                                                          //     FontWeight.w600,
+                                                          // color: greyColor,
+                                                          fontSize: medium),
                                                     ),
                                                     Text(
                                                       "${data?.createdDate}",
                                                         // "${formatDate(data?.createdAt, withTimes: true)}",
                                                         style: sansPro(
+                                                            fontSize: medium,
                                                             color: greyColor)),
                                                     // labelProgress(
                                                     //     data?.statusLaundry ??

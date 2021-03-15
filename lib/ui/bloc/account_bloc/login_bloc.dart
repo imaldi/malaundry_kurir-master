@@ -30,7 +30,7 @@ class LoginBloc extends ChangeNotifier {
   BuildContext context;
   GlobalKey<ScaffoldState> scaffoldKey;
   final _accountRepo = AccountRepository();
-  FirebaseMessaging firebaseMessaging  = FirebaseMessaging();
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging();
 
   bool get isLoading => _isLoading;
   set isLoading(bool val) {
@@ -47,6 +47,8 @@ class LoginBloc extends ChangeNotifier {
       if (res.status == true && res.user.level == "KURIR") {
         await saveSession(res);
         // debugPrint(res.toString());
+      } else if (res.status == true && res.user.level != "KURIR") {
+        showLocalSnackbar("Maaf, user ini bukan kurir", scaffoldKey);
       } else {
         showLocalSnackbar(res.message, scaffoldKey);
       }
